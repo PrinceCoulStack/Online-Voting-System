@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>CAST VOTE</title>
+		<link rel="stylesheet" href="castVote.css" />
+        <script src="castVote.js" defer></script>
+	</head>
+	<body>
+		<header>
+			<!-- header will contain foor logos and navigation bar; two asside in the left one in the right and one main in the middle -->
+			<div class="container">
+				<div class="logos">
+					<img src="Images/PixelAfrica.jpg" alt="Logo 1" class="logo" />
+					<img src="Images/NPPLogo.jpg" alt="Logo 2" class="logo" />
+					<img src="Images/IPMC.jpg" alt="Logo 1" class="logo" />
+					<!-- <img src="Images/EClogo.png" alt="Logo 2" class="logo" /> -->
+				</div>
+			</div>
+		</header>
+        <aside>
+            <div class="container">
+                <h1>CAST YOUR VOTE</h1>
+                <div class="main-content" id="candidatesContainer">
+                    <!-- Candidates will be dynamically rendered here -->
+                </div>
+            <div class="btn">
+                <button type="button" id="cancelBtn">CANCEL</button>
+                <button type="button" id="voteBtn">VOTE</button>
+            </div>
+        <!-- Script to dynamically render and manage candidates from localStorage (including those from candidatureConfirm) -->
+        <script>
+        // --- Dynamic Candidate Rendering and Voting ---
+        document.addEventListener('DOMContentLoaded', function() {
+            const candidatesContainer = document.getElementById('candidatesContainer');
+
+            // 1. Load default candidates
+            let defaultCandidates = [
+                { id: 'candidate1', name: 'Aly', party: 'Niger Party People', symbol: 'Images/ghFlag.png', photo: 'Images/paaPix.png' },
+                { id: 'candidate2', name: 'Bola', party: 'Ghana Freedom Party', symbol: 'Images/ghFlag.png', photo: 'Images/paaPix.png' },
+                { id: 'candidate3', name: 'Kofi', party: 'Ghana Democratic Party', symbol: 'Images/ghFlag.png', photo: 'Images/paaPix.png' },
+                { id: 'candidate4', name: 'Kwame', party: "People's National Convention", symbol: 'Images/ghFlag.png', photo: 'Images/paaPix.png' }
+            ];
+
+            // 2. Load all dynamic candidates from localStorage (array)
+            let dynamicCandidates = [];
+            try {
+                dynamicCandidates = JSON.parse(localStorage.getItem('dynamicCandidates')) || [];
+            } catch (e) { dynamicCandidates = []; }
+
+            // 3. Check for a new candidate from candidatureConfirm (candidatureDetails)
+            const candidatureDetails = localStorage.getItem('candidatureDetails');
+            if (candidatureDetails) {
+                try {
+                    const cand = JSON.parse(candidatureDetails);
+                    // Only add if not already present (by cardID)
+                    if (!dynamicCandidates.some(c => c.cardID === cand.cardID)) {
+                        dynamicCandidates.push({
+                            id: 'candidate' + (defaultCandidates.length + dynamicCandidates.length + 1),
+                            name: cand.firstName,
+                            party: cand.partyName,
+                            symbol: cand.partySymbol || 'Images/ghFlag.png',
+                            photo: 'Images/paaPix.png', // You can store candidate photo if available
+                            cardID: cand.cardID
+                        });
+                        // Save updated dynamicCandidates array
+                        localStorage.setItem('dynamicCandidates', JSON.stringify(dynamicCandidates));
+                    }
+                } catch (e) {}
+            }
+
+            // 4. Merge all candidates
+            let candidates = [...defaultCandidates, ...dynamicCandidates];
+
+            // 5. Render all candidates
+            candidatesContainer.innerHTML = candidates.map((cand, idx) => `
+                <div class="candidate">
+                    <div class="left">
+                        <p>Candidate ${idx + 1}</p>
+                        <img src="${cand.photo}" alt="${cand.name}" class="candidate-photo" />
+                    </div>
+                    <div class="details">
+                        <label>Full Name</label>
+                        <h3>${cand.name}</h3>
+                        <label>Party</label>
+                        <p>${cand.party}</p>
+                    </div>
+                    <div class="right">
+                        <img src="${cand.symbol}" alt="Party Symbol" class="party-symbol" />
+                        <input type="checkbox" class="vote-checkbox" id="${cand.id}" name="voteCandidate" value="${cand.id}" /> Check to Vote
+                    </div>
+                </div>
+            `).join('');
+
+            // 6. Make checkboxes act like radio buttons (only one can be checked)
+            const checkboxes = document.querySelectorAll('.vote-checkbox');
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    if (this.checked) {
+                        checkboxes.forEach(cb => { if (cb !== this) cb.checked = false; });
+                    }
+                });
+            });
+
+            // 7. Voting logic (save selected candidate and redirect)
+            const voteBtn = document.getElementById('voteBtn');
+            if (voteBtn) {
+                voteBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const selected = Array.from(checkboxes).find(cb => cb.checked);
+                    if (!selected) {
+                        alert('Please select a candidate before voting.');
+                        return;
+                    }
+                    // Find candidate object by id
+                    const selectedCandidate = candidates.find(c => c.id === selected.value);
+                    if (selectedCandidate) {
+                        // Update candidateMap in localStorage for confirmVote.html
+                        let candidateMap = JSON.parse(localStorage.getItem('candidateMap')) || {};
+                        candidateMap[selectedCandidate.id] = selectedCandidate;
+                        localStorage.setItem('candidateMap', JSON.stringify(candidateMap));
+                        // Save selected candidate id only (not object)
+                        localStorage.setItem('selectedCandidate', selectedCandidate.id);
+                        window.location.href = 'confirmVote.html';
+                    } else {
+                        alert('Error: Candidate not found.');
+                    }
+                });
+            }
+
+            // 8. Cancel button logic
+            const cancelBtn = document.getElementById('cancelBtn');
+            if (cancelBtn) {
+                cancelBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    checkboxes.forEach(cb => cb.checked = false);
+                    window.location.href = 'userDashboard.html';
+                });
+            }
+        });
+        </script>
+        </aside>
+        <footer>
+			<!-- header will contain foor logos and navigation bar; two asside in the left one in the right and one main in the middle -->
+			<div class="container">
+				<div class="logos">
+					<img src="Images/NigeriaFlag.jpg" alt="Logo 1" class="logo" />
+					<img src="Images/NPPLogo.jpg" alt="Logo 2" class="logo" />
+					<img src="Images/IPMC.jpg" alt="Logo 1" class="logo" />
+					<!-- <img src="Images/EClogo.png" alt="Logo 2" class="logo" /> -->
+				</div>
+			</div>
+		</footer>
+    </body>
+</html>

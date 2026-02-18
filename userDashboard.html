@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Dashboard</title>
+    <link rel="stylesheet" href="castVote.css" />
+    <style>
+        .dashboard-container {
+            /* max-width: 600px; */
+            margin: 2rem auto;
+            background: rgba(173, 173, 173,0.5);
+            height: 100vh;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            padding: 2rem 1.5rem;
+            text-align: center;
+            align-content: center;
+            /* margin-top: 10rem; */
+        }
+        .dashboard-title {
+            color: #0ba613;
+            font-size: 4rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            
+        }
+        .dashboard-title h1{
+            border: 1px solid #0ba613 ;
+            border-radius: 8px;
+            width: 300px;
+            margin: 1rem auto;
+        }
+        .dashboard-phase {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: black;
+        }
+        .dashboard-action {
+            margin-top: 1.5rem;
+        }
+        .dashboard-action button {
+            background: #0ba613;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            padding: 0.8rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 0.5rem;
+            transition: background 0.2s;
+        }
+        .dashboard-action button:disabled {
+            background: #ccc;
+            color: #888;
+            cursor: not-allowed;
+        }
+        @media (max-width: 600px) {
+            .dashboard-container { padding: 1rem 0.2rem; }
+            .dashboard-title { font-size: 1.2rem; }
+            .dashboard-phase { font-size: 1rem; }
+            .dashboard-action button { font-size: 1rem; padding: 0.7rem 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+			<!-- header will contain foor logos and navigation bar; two asside in the left one in the right and one main in the middle -->
+			<div class="container">
+				<div class="logos">
+					<img src="Images/PixelAfrica.jpg" alt="Logo 1" class="logo" />
+					<img src="Images/NPPLogo.jpg" alt="Logo 2" class="logo" />
+					<img src="Images/IPMC.jpg" alt="Logo 1" class="logo" />
+					<!-- <img src="Images/EClogo.png" alt="Logo 2" class="logo" /> -->
+				</div>
+			</div>
+		</header>
+    <div class="dashboard-container">
+        <div class="dashboard-title"><h1>User Dashboard</h1></div>
+        <div class="dashboard-phase" id="dashboardPhase"></div>
+        <div class="dashboard-action" id="dashboardAction"></div>
+    </div>
+      <footer>
+			<!-- header will contain foor logos and navigation bar; two asside in the left one in the right and one main in the middle -->
+			<div class="container">
+				<div class="logos">
+					<img src="Images/NigeriaFlag.jpg" alt="Logo 1" class="logo" />
+					<img src="Images/NPPLogo.jpg" alt="Logo 2" class="logo" />
+					<img src="Images/IPMC.jpg" alt="Logo 1" class="logo" />
+					<!-- <img src="Images/EClogo.png" alt="Logo 2" class="logo" /> -->
+				</div>
+			</div>
+		</footer>
+    <script>
+    // --- Dynamic User Dashboard ---
+    document.addEventListener('DOMContentLoaded', function() {
+        // Get current phase from localStorage (set by admin)
+        // Possible values: 'registration', 'candidature', 'voting', 'results', null
+        const phase = localStorage.getItem('electionPhase');
+        const phaseDiv = document.getElementById('dashboardPhase');
+        const actionDiv = document.getElementById('dashboardAction');
+        let phaseText = '';
+        let actionHtml = '';
+        if (phase === 'registration') {
+            phaseText = 'Voter Registration is Open';
+            actionHtml = '<a href="register.html"><button>Register as Voter</button></a>';
+        } else if (phase === 'candidature') {
+            phaseText = 'Candidature Application is Open';
+            actionHtml = '<a href="applyCandidature.html"><button>Apply as Candidate</button></a>';
+        } else if (phase === 'voting') {
+            phaseText = 'Voting is Open';
+            actionHtml = '<a href="castVote.html"><button>Cast Your Vote</button></a>';
+        } else if (phase === 'results') {
+            phaseText = 'Results are Available';
+            actionHtml = '<a href="results.html"><button>View Results</button></a>';
+        } else {
+            phaseText = 'No Election Phase is Currently Open.';
+            actionHtml = '';
+        }
+        phaseDiv.innerText = phaseText;
+        actionDiv.innerHTML = actionHtml;
+    });
+    </script>
+</body>
+</html>

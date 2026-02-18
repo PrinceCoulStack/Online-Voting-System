@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="castVote.css" />
+    <style>
+        .admin-container {
+            max-width: 500px;
+            margin: 2rem auto;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            padding: 2rem 1.5rem;
+            text-align: center;
+        }
+        .admin-title {
+            color: #0ba613;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+        .admin-phase {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            color: #333;
+        }
+        .admin-actions button {
+            background: #0ba613;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            padding: 0.8rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 0.5rem;
+            transition: background 0.2s;
+        }
+        .admin-actions button.active {
+            background: #388e3c;
+        }
+        @media (max-width: 600px) {
+            .admin-container { padding: 1rem 0.2rem; }
+            .admin-title { font-size: 1.2rem; }
+            .admin-phase { font-size: 1rem; }
+            .admin-actions button { font-size: 1rem; padding: 0.7rem 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <div class="admin-title">Admin Panel</div>
+        <div class="admin-phase" id="adminPhase"></div>
+        <div class="admin-actions">
+            <button onclick="setPhase('registration')">Open Registration</button>
+            <button onclick="setPhase('candidature')">Open Candidature</button>
+            <button onclick="setPhase('voting')">Open Voting</button>
+            <button onclick="setPhase('results')">Open Results</button>
+            <button onclick="setPhase('none')">Close All</button>
+        </div>
+    </div>
+    <script>
+    // --- Admin Panel Phase Control ---
+    function setPhase(phase) {
+        if (phase === 'none') {
+            localStorage.removeItem('electionPhase');
+        } else {
+            localStorage.setItem('electionPhase', phase);
+        }
+        updatePhaseDisplay();
+    }
+    function updatePhaseDisplay() {
+        const phase = localStorage.getItem('electionPhase');
+        const phaseDiv = document.getElementById('adminPhase');
+        let phaseText = '';
+        if (phase === 'registration') phaseText = 'Current Phase: Voter Registration';
+        else if (phase === 'candidature') phaseText = 'Current Phase: Candidature Application';
+        else if (phase === 'voting') phaseText = 'Current Phase: Voting';
+        else if (phase === 'results') phaseText = 'Current Phase: Results';
+        else phaseText = 'No Phase is Open.';
+        phaseDiv.innerText = phaseText;
+    }
+    document.addEventListener('DOMContentLoaded', updatePhaseDisplay);
+    </script>
+</body>
+</html>

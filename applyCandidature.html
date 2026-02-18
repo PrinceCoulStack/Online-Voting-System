@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="applyCandidature.css">
+    <script src="applyCandidature.js" defer></script>
+</head>
+<body>
+    <header>
+			<!-- header will contain foor logos and navigation bar; two asside in the left one in the right and one main in the middle -->
+			<div class="container">
+				<div class="logos">
+					<img src="Images/PixelAfrica.jpg" alt="Logo 1" class="logo" />
+					<img src="Images/NPPLogo.jpg" alt="Logo 2" class="logo" />
+					<img src="Images/IPMC.jpg" alt="Logo 1" class="logo" />
+					<!-- <img src="Images/EClogo.png" alt="Logo 2" class="logo" /> -->
+				</div>
+			</div>
+		</header>
+        <aside>
+            <div class="container">
+                <h1>Apply your candidature</h1>
+                <form action="/castVote" method="post" th:object="${userRegister}" id="castVoteForm">
+                    <div class="formContaine">
+                        <div class="applyCandidature">
+                        <label for="cardID">Enter Card ID</label>
+                        <input type="text" id="cardID" name="cardID" placeholder="Notional ID"   ><br><br>
+                        <label for="firsName">Enter First Name</label>
+                        <input type="text" id="firstName" name="firsName"  placeholder="Max Charator 100"   ><br><br>
+                        <label for="lastName">Enter Last Name</label>
+                        <input type="text" id="lastName" name="lastName"  placeholder="Max Charator 100"   ><br><br>
+                        <!-- <label for="partyName">Enter Party Name</label>
+                        <input type="text" id="partyName" name="partyName"  placeholder="Max Charator 100"   ><br><br> -->
+                        <!-- <label for="partyColor">Party Color</label><br>
+                        <input type="color" id="partyColor" name="partyColor" ><br><br><br>
+                        <label for="partySymbol">Party Symbol</label>
+                        <input type="file" id="partySymbol" name="partySymbol" accept="image/*"><br><br> -->
+                    </div>
+                    <div class="gurantor">
+                        <label for="passportPicture">Passport Picture</label>
+                       <input type="file" id="passportPicture" name="passportPicture" accept="image/*"><br><br> 
+                        <label for="duesRecords">Dues Records</label>
+                       <input type="file" id="duesRecords" name="duesRecords" accept="image/*"><br><br> 
+                        <label for="feeReceipt">Fee Receipt</label>
+                       <input type="file" id="feeReceipt" name="feeReceipt" accept="image/*"><br><br> 
+                        <!-- <label for="partySymbol">Party Symbol</label>
+                       <input type="file" id="partySymbol" name="partySymbol" accept="image/*"><br><br> --> 
+                        
+                        <!-- <label for="secreataryName">Enter Secreatary's Full Name</label>
+                        <input type="text" id="secreataryName" name="secreataryName"  placeholder="Max Charator 150"><br><br>
+                        <label for="secreataryEmail">Enter Party Secreatary Email</label>
+                        <input type="email" id="secreataryEmail" name="secreataryEmail"  placeholder="eg:...@Example.Example"><br><br>
+                        <label for="secrataryPhoneNumber">Enter Your Guarantor Phone Number</label>
+                        <input type="tel" id="secrataryPhoneNumber" name="secrataryPhoneNumber"  placeholder="eg:+233XXXXXXXXX"><br><br>
+                        <label for="secreataryName">Enter Chairman's Full Name</label>
+                        <input type="text" id="chairmanName" name="chairmanName"  placeholder="Max Charator 150"><br><br>
+                        <label for="chairmanEmail">Enter Party Chairman's Email</label>
+                        <input type="email" id="chairmanEmail" name="chairmanEmail"  placeholder="eg:...@Example.Example"><br><br>
+                        <label for="chairmanPhoneNumber">Enter Your Chairman Phone Number</label>
+                        <input type="tel" id="chairmanPhoneNumber" name="chairmanPhoneNumber"  placeholder="eg:+233XXXXXXXXX"><br><br> -->
+                    </div>
+                </div>
+                <div class="msg">
+                    <p id="errorMsg"></p>
+                    <p id="successMsg"></p>
+                </div>
+                <div class="btn">
+                    <button type="reset" id="resetbtn">Cancel</button>
+                    <button type="button" id="submitbtn">Continue</button>
+                </div>
+                    
+
+                </form>
+                
+            </div>
+        </aside>
+        <footer>
+			<!-- header will contain foor logos and navigation bar; two asside in the left one in the right and one main in the middle -->
+			<div class="container">
+				<div class="logos">
+					<img src="Images/NigeriaFlag.jpg" alt="Logo 1" class="logo" />
+					<img src="Images/NPPLogo.jpg" alt="Logo 2" class="logo" />
+					<img src="Images/IPMC.jpg" alt="Logo 1" class="logo" />
+					<!-- <img src="Images/EClogo.png" alt="Logo 2" class="logo" /> -->
+				</div>
+			</div>
+		</footer>
+</body>
+</html>

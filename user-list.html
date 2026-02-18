@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Registered Users</title>
+		<link rel="stylesheet" href="/register.css" />
+		
+	</head>
+	<body>
+		<h1>Registered Users</h1>
+		<table>
+			<thead>
+				<tr>
+					<th>Card ID</th>
+					<th>First Name</th>
+					<th>Last Name</th>
+					<th>Email</th>
+					<th>Phone</th>
+					<th>Gender</th>
+					<th>Date of Birth</th>
+					<th>Region</th>
+					<th>Constituency</th>
+				</tr>
+			</thead>
+			<tbody>
+				<!--/*@thymesVar id="users" type="java.util.List"*/-->
+				<tr th:each="user : ${users}">
+					<td th:text="${user.cardID}"></td>
+					<td th:text="${user.firstName}"></td>
+					<td th:text="${user.lastName}"></td>
+					<td th:text="${user.email}"></td>
+					<td th:text="${user.phoneNumber}"></td>
+					<td th:text="${user.gender}"></td>
+					<td th:text="${user.dateOfBirth}"></td>
+					<td th:text="${user.regionRegistration}"></td>
+					<td th:text="${user.constituency}"></td>
+				</tr>
+			</tbody>
+		</table>
+	</body>
+</html>

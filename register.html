@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Register As Voter</title>
+		<!-- <link rel="stylesheet" href="../static/register.css"> -->
+		<link rel="stylesheet" href="register.css" />
+		<!-- <link rel="stylesheet" href="castVote.css"> -->
+		<script src="register.js" defer></script>
+	</head>
+	<body>
+		<header>
+			<!-- header will contain foor logos and navigation bar; two asside in the left one in the right and one main in the middle -->
+			<div class="container">
+				<div class="logos">
+					<img src="Images/PixelAfrica.jpg" alt="Logo 1" class="logo" />
+					<img src="Images/NPPLogo.jpg" alt="Logo 2" class="logo" />
+					<img src="Images/IPMC.jpg" alt="Logo 1" class="logo" />
+					<!-- <img src="Images/EClogo.png" alt="Logo 2" class="logo" /> -->
+				</div>
+			</div>
+		</header>
+		<aside>
+			<div class="container">
+				<div class="left-aside">
+					<nav>
+						<ul>
+							<!-- <li><a href="#">Home</a></li> -->
+							<li><a href="#">Registration</a></li>
+							<!-- <li><a href="/login">Login</a></li> -->
+							<!-- <li><a href="/about">About</a></li> -->
+							<!-- <li><a href="/contact">Contact</a></li> -->
+							<!-- <div class="rule">
+								<h2>To Know</h2>
+								<p>You must be  a citizen of Ghana  only </p>
+								<p>You must be eighteen (18) years  and above</p>
+								<p>You must provide Ghana Card only to register</p>
+							</div> -->
+
+						</ul>
+					</nav>
+				</div>
+				<div class="main-content">
+					<h1>User Registration Page</h1>
+					<form action="/register" method="post" th:object="${userRegister}" id="registerForm">
+						<div class="form-container">
+							
+						</div>
+						<div class="left">
+							<label for="cardId">Enter Patry ID Card Number</label>
+							<input type="tel" id="cardId" name="cardId"  placeholder="Only 11 Charators" >
+							<label for="firsName">Enter First Name</label>
+							<input type="text" id="firstName" name="firsName"  placeholder="Max Charator 100"   >
+							<!-- <input
+								type="text"
+								id="firstName"
+								
+								th:field="*{firsName}"
+								
+							required placeholder="Max Charator 100" /><br /><br /> -->
+							
+							<label for="lastName">Enter Last Name</label>
+							<input type="text" id="lastName" name="lastName"  placeholder="Max Charator 100">
+							<label for="DateOfBirth">Date of Birth</label>
+							<input type="date" id="dateOfBirth" name="dateOfBirth" placeholder="DD-MM-YYYY"">
+							<!-- <input
+								type="text"
+								id="dateOfBirth"
+								<!--
+								th:field="*{DateOfBirth}"
+								-- />
+							required /><br /><br /> -->
+							<label for="email">Enter Email</label>
+							<input type="email" id="email" name="email"  placeholder="eg:Example@Example.Example">
+
+							<!-- <input type="text" id="email" <!-- th:field="*{email}" -- />
+							required /><br /><br /> -->
+							<label for="regionRegistration">Enter The Region Of Registration</label>
+							<input type="text" id="regionRegistration" name="regionRegistration"  placeholder="Max Charator 100">
+							<!-- <input
+							type="text"
+							id="regionRegistration"
+							<!--
+								th:field="*{regionRegistration}"
+								-- />
+								required /><br /><br /> -->
+								
+							<!-- <label for="userPassWord">Password</label>
+							<input type="password" id="userPassWord" name="userPassWord"  placeholder="More Or Equal To 6 Digit"> -->
+							<!-- <input
+								type="text"
+								id="userPassWord"
+								<!--
+								th:field="*{userPassWord}"
+								-- />
+							required /><br /><br /> -->
+						</div>
+						<div class="right">
+
+							<label for="picture">Appload Passport Picture</label>
+							<input type="file" id="picture" name="picture"  accept="image/*">
+							<!-- <input type="text" id="lastName" <!-- th:field="*{lastName}" -- />
+							required /><br /><br /> -->
+							<div class="userGender">
+								<label for="gender">Gender</label> 
+								<input type="radio" id="male" name="gender" value="Male" />Male
+								<!--th:field="*{gender}"-->
+								<input type="radio" id="female" name="gender" value="Female" />Female 
+								<!-- th:field="*{gender}" -->
+							</div><br>
+							<label for="phoneNumber">Enter Phone Number</label>
+							<input type="tel" id="phoneNumber" name="phoneNumber"  placeholder="Only Numerique Values">
+							<!-- <input
+								type="tel"
+								id="phoneNumber"
+								<!--
+								th:field="*{phoneNumber}"
+								-- />
+							required /><br /><br /> -->
+							<label for="districtRegistration">DISTRICT OF REGISTRATION</label>
+							<input type="text" id="districtRegistration" name="districtRegistration"  placeholder="Max Charator 100">
+							<!-- <input
+								type="text"
+								id="districtRegistration"
+								<!--
+								th:field="*{districtRegistration}"
+								-- />
+							required /><br /><br /> -->
+							<!-- <label for="homeTown">Enter Your Home Town</label>
+								<input type="text" id="homeTown" name="homeTown"  placeholder="Max Charator 100"> -->
+								<!-- <input type="text" id="homeTown" <!-- th:field="*{homeTown}" -- />
+								required /><br /><br /> -->
+							<label for="constituency">Enter Your Consitituency</label>
+							<input type="text" name="constituency" id="constituency" name="constituency"  placeholder="Max Charator 100">
+							<!-- <input
+								type="text"
+								id="constituency"
+								<!--
+								th:field="*{constituency}"
+								-- />
+							required /><br /><br /> -->
+							<!-- <label for="disabilityStatus">Disability Status</label> -->
+							<!-- <input type="text" id="disabilityStatus" name="disabilityStatus"  placeholder="Max Charator 100"> -->
+							<!-- <input
+								type="text"
+								id="disabilityStatus"
+								
+								th:field="*{disabilityStatus}"
+								-- />
+							required /><br /><br /> -->
+							<label for="GPSAddress">GPS Address</label> 
+							<input type="text" id="GPSAddress" name="GPSAddress"  placeholder="Max Charator 100">
+							<!-- <input
+								type="text"
+								id="GPSAddress"
+								<!-- th:field="*{GPSAddress}"-- />
+							required <br /><br /> -->
+							<!-- <label for="confirmUserPassWord">Confirm PassWord</label> -->
+							<!-- <input type="password" id="confirmUserPassWord" name="confirmUserPassWord"  placeholder="More Or Equal To 6 Digit"> -->
+							<!-- <input
+								type="text"
+								id="confirmUserPassWord"
+								<!-- th:field="*{confirmUserPassWord}"-- />
+							required <br /><br /> -->
+						</div>
+						<!--Error Handle-->
+					</form>
+					<div class="error">
+						<p id="errorMsg"></p>
+						<p id="successMsg"></p>
+					</div> <br><br>
+					<div class="btn">
+						<!-- <button type="reset">Cancel</button> -->
+						<button type="submit" id="continue">Continue</button>
+					</div>
+				</div>
+				<!-- <div class="right-aside">
+					<h2>Right Aside Content</h2>
+					<p>This is the right aside section.</p>
+				</div> -->
+			</div>
+		</aside>
+		<footer>
+			<!-- header will contain foor logos and navigation bar; two asside in the left one in the right and one main in the middle -->
+			<div class="container">
+				<div class="logos">
+					<img src="Images/NigeriaFlag.jpg" alt="Logo 1" class="logo" />
+					<img src="Images/NPPLogo.jpg" alt="Logo 2" class="logo" />
+					<img src="Images/IPMC.jpg" alt="Logo 1" class="logo" />
+					<!-- <img src="Images/EClogo.png" alt="Logo 2" class="logo" /> -->
+				</div>
+			</div>
+		</footer>
+	</body>
+</html>

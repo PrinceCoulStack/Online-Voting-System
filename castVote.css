@@ -1,0 +1,322 @@
+/* ==============================
+   Global Styles
+   ============================== */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f8fb;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    box-sizing: border-box;
+
+    /* Background image */
+    background-image: url('Images/backHom.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 80%;
+    height: 100%;
+}
+
+/* ==============================
+   Header
+   ============================== */
+header, footer {
+    color: #fff;
+    padding: 1rem 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    background-color: #f4f8fb;
+    width: 92%;
+    position: sticky;
+    z-index: 1000;
+    margin: 0 auto;
+    border-radius: 8px;
+    
+}
+/* footer{
+    bottom: 0;
+} */
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2vw;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.logos {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding: 5px;
+}
+
+.logo {
+    height: 100px;
+    width: 170px;
+}
+
+/* Heading */
+h1 {
+    text-align: center;
+    color: #0ba613;
+    padding: 10px;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 30px;
+}
+
+  
+   /* Main Voting Section */ 
+  
+aside {
+    margin: 3rem auto;
+    padding: 2rem 0;
+    max-width: 1600px;
+}
+
+/* Candidate Grid Layout */
+.main-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 4rem; /* ✅ gap between candidate boxes */
+    padding: 2rem;
+    margin: 0 auto;
+    max-width: 1400px;
+    justify-items: center;
+}
+
+/* Candidate Card */
+.candidate {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: stretch;
+
+    background: #fff;
+    border: 1.5px solid #ddd;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+
+    width: 100%;
+    aspect-ratio: 4 / 2;  /*keeps it rectangular */
+    /* min-height: 160px; */
+
+    padding: 1rem;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    overflow: hidden;
+}
+
+.candidate:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+}
+
+/*Candidate Sub-sections */
+
+/* Left Section: Candidate photo + name */
+.candidate .left {
+    flex: 1 1 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem;
+    text-align: center;
+}
+
+.candidate .left img {
+    height: 80px;
+    width: 80px;
+    border-radius: 8px;
+    object-fit: cover;
+    margin-top: 0.5rem;
+}
+
+.candidate .left p {
+    font-size: 1rem;
+    color: #444;
+    margin: 0;
+}
+
+/* Middle Section: Candidate details */
+.candidate .details {
+    flex: 2 1 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    text-align: left;
+    padding: 0.5rem;
+}
+
+.candidate .details h3 {
+    margin: 0.2rem 0;
+    text-transform: uppercase;
+    font-size: 1.1rem;
+    color: #222;
+}
+
+.candidate .details p {
+    margin: 0.2rem 0;
+    font-size: 0.95rem;
+    color: #555;
+}
+
+/* Right Section: Party symbol + checkbox */
+.candidate .right {
+    flex: 1 1 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem;
+}
+
+.candidate .right img {
+    height: 40px;
+    width: 40px;
+    object-fit: cover;
+    border-radius: 6px;
+    margin-bottom: 0.5rem;
+}
+
+/* ✅ Checkbox styling + fix for mobile visibility */
+.candidate .right input[type="checkbox"] {
+    transform: scale(1.3); /* larger for accessibility */
+    cursor: pointer;
+    margin: 0.5rem auto;
+    display: block; /* ensures it does not collapse on mobile */
+}
+
+/* ==============================
+   Buttons
+   ============================== */
+.btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.btn button {
+    padding: 0.8rem 2rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#cancelBtn {
+    background-color: #865e08;
+    color: #fff;
+}
+
+#cancelBtn:hover {
+    background-color: #b3860d;
+    transform: scale(1.05);
+}
+
+#voteBtn {
+    background-color: #0ba613;
+    color: #fff;
+}
+
+#voteBtn:hover {
+    background-color: #087e0e;
+    transform: scale(1.05);
+}
+
+/* ==============================
+   Responsive Grid Controls
+   ============================== */
+
+/* Desktop: max 4 per row */
+@media (min-width: 1200px) {
+    .main-content {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* Tablet landscape: 3 per row */
+@media (max-width: 1199px) and (min-width: 800px) {
+    .main-content {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .logos {
+        /* display: flex; */
+        justify-content: center;
+        /* align-items: center;
+        gap: 1rem;
+        padding: 5px; */
+    }
+
+    .logo {
+        height: 90px;
+        width: 150px;
+    }
+}
+
+/* Tablet portrait: 2 per row */
+@media (max-width: 799px) and (min-width: 500px) {
+    .main-content {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .logos {
+        /* display: flex; */
+        justify-content: center;
+        /* align-items: center;
+        gap: 1rem;
+        padding: 5px; */
+    }
+
+    .logo {
+        height: 70px;
+        width: 120px;
+    }
+}
+
+/* Mobile: 1 per row */
+@media (max-width: 499px) {
+    .main-content {
+        grid-template-columns: 1fr;
+    }
+
+    /* Candidate card adjusts for vertical layout */
+    .candidate {
+        aspect-ratio: 4 / 3; /* slightly taller for mobile */
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    /* Details center aligned */
+    .candidate .details {
+        align-items: center;
+        text-align: center;
+    }
+
+    /* Checkbox always visible */
+    .candidate .right {
+        flex-direction: column;
+    }
+    .candidate .right input[type="checkbox"] {
+        margin-top: 0.5rem;
+    }
+    .logos {
+        /* display: flex; */
+        justify-content: center;
+        /* align-items: center;
+        gap: 1rem;
+        padding: 5px; */
+    }
+
+    .logo {
+        height: 60px;
+        width: 100px;
+    }
+}

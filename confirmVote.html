@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>CAST VOTE</title>
+		<link rel="stylesheet" href="castVote.css" />
+        <script src="castVote.js" defer></script>
+        <script src="confirmVote.js"></script>
+	</head>
+	<body>
+		<header>
+			<!-- header will contain foor logos and navigation bar; two asside in the left one in the right and one main in the middle -->
+			<div class="container">
+				<div class="logos">
+					<img src="Images/PixelAfrica.jpg" alt="Logo 1" class="logo" />
+					<img src="Images/NPPLogo.jpg" alt="Logo 2" class="logo" />
+					<img src="Images/IPMC.jpg" alt="Logo 1" class="logo" />
+					<!-- <img src="Images/EClogo.png" alt="Logo 2" class="logo" /> -->
+				</div>
+			</div>
+		</header>
+        <aside>
+            <div class="container">
+                <h1>CONFIRM YOUR VOTE</h1>
+                <!-- Candidate summary will be rendered here -->
+                <div id="candidateSummary"></div>
+                <!-- Voter ID input form -->
+                <form id="confirmForm" class="confirm-form">
+                    <label for="voterId">Enter Your Voter ID to Confirm Vote</label>
+                    <input type="text" id="voterId" name="voterId" required placeholder="Enter Voter ID" />
+                    <div id="errorMsg" class="msg-error"></div>
+                    <div id="successMsg" class="msg-success"></div>
+                    <div class="btn">
+                        <button type="reset" id="resetbtn">CANCEL</button>
+                        <button type="submit" id="confirmVoteBtn">Confirm</button>
+                    </div>
+                </form>
+            </div>
+        </aside>
+        <style>
+        /* --- Styling for confirmVote.html --- */
+        .container{
+            max-width: 1400px;
+            
+            margin: 0 auto;
+            padding: 15px 20px;
+            border-radius: 8px;
+            background-color: rgba(255, 255, 255,0.5);
+        }
+        #candidateSummary {
+            margin: 1.5rem auto 0 auto;
+            max-width: 400px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            padding: 1.2rem 1rem 1rem 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow: hidden;
+        }
+        #candidateSummary .candidate {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 1.2rem;
+            width: 100%;
+            background: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+            padding: 0.7rem 0.5rem;
+        }
+        #candidateSummary .left img {
+            border-radius: 8px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+        }
+        #candidateSummary .details {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+        }
+        #candidateSummary label {
+            color: #0ba613;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.1em;
+        }
+        #candidateSummary h3 {
+            margin: 0 0 0.2em 0;
+            font-size: 1.2rem;
+            color: #222;
+        }
+        #candidateSummary p {
+            margin: 0;
+            color: #555;
+            font-size: 1rem;
+        }
+        .confirm-form {
+            margin: 2.5rem auto 0 auto;
+            max-width: 400px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            padding: 1.5rem 1.2rem 1.2rem 1.2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        .confirm-form label {
+            color: #0ba613;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        .confirm-form input[type="text"] {
+            padding: 0.7rem 1rem;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            margin-bottom: 0.2rem;
+            outline: none;
+            transition: border 0.2s;
+        }
+        .confirm-form input[type="text"]:focus {
+            border: 1.5px solid #0ba613;
+        }
+        .confirm-form button {
+            background: #0ba613;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            padding: 0.8rem 0;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 0.5rem;
+            padding: 10px;
+            transition: background 0.2s;
+        }
+        .confirm-form button:disabled {
+            background: #ccc;
+            color: #888;
+            cursor: not-allowed;
+        }
+        .confirm-form button:hover{
+            background: #0a8e0f;
+        }
+        .btn {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+        #resetbtn, #confirmVoteBtn {
+            flex: 1;
+        }
+        #resetbtn{
+            background-color: #e17a0c;
+        }
+        #resetbtn:hover {
+            background: #743f05;
+            color: #fff;
+        }
+        .msg-error {
+            color: #d32f2f;
+            font-size: 1rem;
+            min-height: 1.2em;
+        }
+        .msg-success {
+            color: #388e3c;
+            font-size: 1rem;
+            min-height: 1.2em;
+        }
+        @media (max-width: 600px) {
+            #candidateSummary, .confirm-form {
+                max-width: 98vw;
+                padding: 1rem 0.5rem;
+            }
+            #candidateSummary .candidate {
+                flex-direction: column;
+                gap: 0.5rem;
+                align-items: flex-start;
+            }
+            #candidateSummary .left img {
+                height: 44px !important;
+                width: 44px !important;
+            }
+            #candidateSummary h3 {
+                font-size: 1rem;
+            }
+            #candidateSummary p {
+                font-size: 0.95rem;
+            }
+        }
+        </style>
+        <!-- Script to dynamically show the selected candidate -->
+        <!-- <script>
+       
+        </script> -->
+         <footer>
+			<!-- header will contain foor logos and navigation bar; two asside in the left one in the right and one main in the middle -->
+			<div class="container">
+				<div class="logos">
+					<img src="Images/NigeriaFlag.jpg" alt="Logo 1" class="logo" />
+					<img src="Images/NPPLogo.jpg" alt="Logo 2" class="logo" />
+					<img src="Images/IPMC.jpg" alt="Logo 1" class="logo" />
+					<!-- <img src="Images/EClogo.png" alt="Logo 2" class="logo" /> -->
+				</div>
+			</div>
+		</footer>
+    </body>
+</html>

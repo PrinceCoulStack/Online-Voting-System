@@ -1,0 +1,203 @@
+body{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f4f8fb;
+    margin: 0;
+    padding: 0;
+}
+.VoterCard {
+    /* max-width: 350px; */
+    width: 100%;
+    margin: 2rem auto;
+    padding: 2rem 1rem;
+    background: rgba(255, 255, 255,0.3);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    overflow: hidden;
+    box-sizing: border-box;
+}
+.VoterCardHeader{
+    text-align: center;
+    margin-bottom: 1rem;
+    background-color: yellow;
+    /* padding: 10px; */
+    border-radius: 8px;
+}
+.VoterCardHeader .logos{
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+}
+.VoterCardHeader .logo {
+    height: 50px;
+    max-width: 100%;
+}
+.VoterCardHeader h2{
+    margin: 0;
+    color: green;
+    font-size: 0.7rem;
+}
+aside{
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    margin: 1rem auto;
+    /* height: 500px; */
+}
+ul{
+    list-style: none;
+    padding: 0;
+}
+ul li{
+    margin-bottom: 1rem;
+    font-style: 1rem;
+    color: #333;
+    text-decoration: none;
+}
+
+.voter-card {
+    border: 2px solid #ccc;
+    padding: 1.5rem 1rem;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    width: 100%;
+    margin: 1.5rem auto;
+    box-sizing: border-box;
+}
+.card-header{
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 3rem;
+    background-color: green;
+    color: #fff;
+    border-radius: 8px;
+    /* font-size: 22px; */
+}
+.voter-card h2{
+    /* text-align: center; */
+    /* color: #0ba613; */
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+.voter-card p{
+    margin: 8px 0;
+    font-size: 0.5rem;
+    color: #555;
+}
+.voter-card h3{
+    margin: 8px 0;
+    font-size: 0.8rem;
+    color: #000;
+    text-transform: uppercase;
+}
+.voter-card #userVoteIDNumberDisplay{
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #000;
+}
+.card-body {
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.card-body .left, .card-body .right{
+    flex: 1;
+}
+.card-body .photo-section{
+    flex: 1;
+    /* height: 500px; */
+}
+.card-body .user-photo {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    margin-top: 10px;
+    max-width: 100%;
+}
+.bttn{
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+@media (max-width: 900px) {
+    .VoterCard {
+        max-width: 95vw;
+        padding: 1.5rem 0.5rem;
+    }
+    .voter-card {
+        max-width: 98vw;
+        padding: 1rem 0.5rem;
+    }
+    .card-body {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.5rem;
+    }
+    .card-body .user-photo {
+        width: 80px;
+        height: 80px;
+    }
+}
+
+@media (max-width: 600px) {
+    .VoterCard {
+        padding: 1rem 0.2rem;
+    }
+    .voter-card {
+        padding: 0.7rem 0.2rem;
+    }
+    .card-body .user-photo {
+        width: 60px;
+        height: 60px;
+    }
+    h2 {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 400px) {
+    .VoterCard {
+        padding: 0.5rem 0.1rem;
+    }
+    .voter-card {
+        padding: 0.3rem 0.1rem;
+    }
+    .card-body .user-photo {
+        width: 40px;
+        height: 40px;
+    }
+    h2 {
+        font-size: 0.8rem;
+    }
+}
+.card-body .details-section{
+    flex: 2;
+    /* height: 500px; */
+}
+button{
+    display: block;
+    width: 100%;
+    padding: 0.7rem 4rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 1.5rem auto;
+    cursor: pointer;
+    background: #0ba613;
+    color: #fff;
+}
+
+
+

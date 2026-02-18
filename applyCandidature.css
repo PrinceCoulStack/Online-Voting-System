@@ -1,0 +1,266 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f8fb;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    box-sizing: border-box;
+
+    /* Background image */
+    background-image: url('Images/backHom.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 80%;
+}
+header, footer{
+    background: #f4f8fb;
+    color: #fff;
+    padding: 1rem 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2vw;
+    width: 100%;
+    box-sizing: border-box;
+}
+.menuHeader{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 1rem;
+    padding: 5px;
+}
+.logos{
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px;
+    gap: 1rem;
+}
+.logo{
+    height: 100px;
+    width: 170px;
+}
+aside{
+    /* overflow: hidden; */
+    /* background-image: url('Images/votGirl.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position:80%; */
+    color: #fff;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255,0.4);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+h1{
+    text-align: center;
+    color: #0ba613;
+    padding: 10px;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 30px;
+}
+form{
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    /* background-color: #fff; */
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+/* Responsive form container */
+.formContaine {
+    display: flex;
+    gap: 2vw;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    background-color: rgba(245, 165, 16,0.3);
+    padding: 8px;
+    border-radius: 8px;
+    color: #fff;
+}
+/* Divide the form into two part */
+.applyCandidature, .gurantor {
+    flex: 1 1 300px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 1rem;
+    min-width: 220px;
+    box-sizing: border-box;
+    margin: 0.5rem 0;
+}
+.applyCandidature {
+    margin-right: 1vw;
+}
+.gurantor {
+    margin-left: 1vw;
+}
+label,h3{
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    /* color: #ccc; */
+}
+h3{
+    color: #fff;
+}
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="date"],
+input[type="tel"],
+input[type="file"],
+select {
+    width: 100%;
+    padding: 0.7em;
+    margin-bottom: 1em;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    color: #363839;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 1.1rem;
+    text-align: center;
+    transition: border 0.2s;
+}
+input[type="text"]:focus,
+input[type="email"]:focus, 
+input[type="password"]:focus, 
+input[type="date"]:focus,
+input[type="tel"]:focus, 
+/* input[type="color"]:focus,  */
+input[type="file"]:focus, 
+select:focus{
+    border-color: #0ba613;
+    outline: none;
+}
+.btn{
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+button{
+    background-color: #0ba613;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 18px;
+    width: 150px;
+    margin: 5px;
+    margin-bottom: 20px;
+    transition: transform 0.2s ease-in-out;
+    transition: background-color 0.2s ease-in-out;
+}
+button:hover{
+    background-color: #0a8e0f;
+    transform: scale(1.05);
+}
+#resetbtn{
+     background-color: #865e08;
+    color: #fff;
+    /* transition: transform 0.2s ease; */
+    transition: background-color 0.2s ease;
+}
+#resetbtn:hover{
+    background-color: #b3860d;
+    transform: scale(1.05);
+}
+
+/* Tablet landscape: 3 per row */
+@media (max-width: 1199px) and (min-width: 800px) {
+    .container {
+        padding: 0 1vw;
+    }
+    .formContaine {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 0.5rem;
+    }
+    .applyCandidature, .gurantor {
+        margin: 0.5rem 0;
+        min-width: 180px;
+    }
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="date"],
+    input[type="tel"],
+    input[type="file"],
+    select {
+        font-size: 1rem;
+    }
+    .logos {
+        /* display: flex; */
+        justify-content: center;
+        /* align-items: center;
+        gap: 1rem;
+        padding: 5px; */
+    }
+
+    .logo {
+        height: 90px;
+        width: 150px;
+    }
+}
+
+@media (max-width: 799px) and (min-width: 500px) {
+    .container {
+        padding: 0 0.5vw;
+    }
+    h1 {
+        font-size: 1.2rem;
+    }
+    .formContaine {
+        gap: 0.5rem;
+    }
+    .applyCandidature, .gurantor {
+        padding: 0.5rem;
+        min-width: 120px;
+    }
+    button {
+        font-size: 1rem;
+        /* width: 100%; */
+        padding: 0.5rem 0;
+    }
+    .logos {
+        /* display: flex; */
+        justify-content: center;
+        /* align-items: center;
+        gap: 1rem;
+        padding: 5px; */
+    }
+
+    .logo {
+        height: 70px;
+        width: 120px;
+    }
+}
+
+@media (max-width: 499px) {
+    .container {
+        padding: 0 2px;
+    }
+    h1 {
+        font-size: 1rem;
+    }
+    .applyCandidature, .gurantor {
+        padding: 0.2rem;
+    }
+    .logos {
+        /* display: flex; */
+        justify-content: center;
+        /* align-items: center;
+        gap: 1rem;
+        padding: 5px; */
+    }
+
+    .logo {
+        height: 60px;
+        width: 100px;
+    }
+}

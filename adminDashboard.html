@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="castVote.css" />
+    <style>
+        .admin-container {
+            /*max-width: 700px;*/
+            width: 90%;
+            margin: 2rem auto;
+            background: rgba(255, 255, 255,0.5);
+            height: 70vh;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            padding: 2rem 1.5rem;
+            text-align: center;
+        }
+        .admin-title {
+            color: #0ba613;
+            text-transform: uppercase;
+            font-weight: 700;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+        .admin-section {
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 1rem;
+        }
+        .admin-section button {
+            background: #0ba613;
+            color: #fff;
+            font-size: 1rem;
+            border-radius: 8px;
+            border: none;
+            padding: 0.5rem;
+            cursor: pointer;
+            margin: 1rem;
+            transition: background 0.2s;
+        }
+        .admin-section button:hover {
+            background: #388e3c;
+        }
+
+        .admin-actions button, .admin-actions select {
+            background: #0ba613;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            padding: 0.8rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 0.5rem;
+            transition: background 0.2s;
+        }
+        .admin-actions select {
+            background: #fff;
+            color: #0ba613;
+            border: 1.5px solid #0ba613;
+            padding: 0.7rem 1rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-right: 1rem;
+        }
+        .admin-actions button.active {
+            background: #388e3c;
+        }
+        .list-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+        .list-table th, .list-table td {
+            border: 1px solid #b0bec5;
+            padding: 0.7rem 1rem;
+            text-align: center;
+        }
+        .list-table th {
+            background: #0ba613;
+            color: #fff;
+        }
+        .list-table tr:nth-child(even) {
+            background: #f4f8fb;
+        }
+        @media (max-width: 600px) {
+            .admin-container { padding: 1rem 0.2rem; }
+            .admin-title { font-size: 1.2rem; }
+            .admin-actions button, .admin-actions select { font-size: 1rem; padding: 0.7rem 1rem; }
+            .list-table th, .list-table td { padding: 0.4rem 0.2rem; font-size: 0.95rem; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+			<!-- header will contain foor logos and navigation bar; two asside in the left one in the right and one main in the middle -->
+			<div class="container">
+				<div class="logos">
+					<img src="Images/PixelAfrica.jpg" alt="Logo 1" class="logo" />
+					<img src="Images/NPPLogo.jpg" alt="Logo 2" class="logo" />
+					<img src="Images/IPMC.jpg" alt="Logo 1" class="logo" />
+					<!-- <img src="Images/EClogo.png" alt="Logo 2" class="logo" /> -->
+				</div>
+			</div>
+		</header>
+    <div class="admin-container">
+        <div class="admin-title">Admin Dashboard</div>
+        <div class="admin-section">
+            <div class="admin-actions">
+                <select id="phaseSelect">
+                    <option value="none">-- Select Phase --</option>
+                    <option value="registration">Voter Registration</option>
+                    <option value="candidature">Candidature Application</option>
+                    <option value="voting">Voting</option>
+                    <option value="results">Results</option>
+                </select>
+                <button onclick="setPhase()">Open Phase</button>
+            </div>
+            <div id="adminPhase" style="margin-top:1rem;color:#0ba613;font-weight:600; font-size: 1rem; text-transform: uppercase;"></div>
+        </div>
+        <div class="admin-section">
+            <button onclick="showRegistrations()">List of Registered Voters</button>
+            <button onclick="showCandidates()">List of Candidates</button>
+            <button onclick="showAddElection()">Add Election</button>
+        </div>
+        <div id="adminList"></div>
+        <div id="addElectionForm" style="display:none;margin-top:2rem;"></div>
+    </div>
+    <script>
+    // --- Phase Control ---
+    function setPhase() {
+        const phase = document.getElementById('phaseSelect').value;
+        if (phase === 'none') {
+            localStorage.removeItem('electionPhase');
+        } else {
+            localStorage.setItem('electionPhase', phase);
+        }
+        updatePhaseDisplay();
+    }
+    function updatePhaseDisplay() {
+        const phase = localStorage.getItem('electionPhase');
+        const phaseDiv = document.getElementById('adminPhase');
+        let phaseText = '';
+        if (phase === 'registration') phaseText = 'Current Phase: Voter Registration';
+        else if (phase === 'candidature') phaseText = 'Current Phase: Candidature Application';
+        else if (phase === 'voting') phaseText = 'Current Phase: Voting';
+        else if (phase === 'results') phaseText = 'Current Phase: Results';
+        else phaseText = 'No Phase is Open.';
+        phaseDiv.innerText = phaseText;
+    }
+    document.addEventListener('DOMContentLoaded', updatePhaseDisplay);
+
+    // --- List of Registered Voters ---
+    function showRegistrations() {
+        document.getElementById('addElectionForm').style.display = 'none';
+        let users = [];
+        try {
+            users = JSON.parse(localStorage.getItem('registeredVoters')) || [];
+        } catch (e) { users = []; }
+        let html = '<h3>Registered Voters</h3>';
+        if (users.length === 0) {
+            html += '<p>No voters registered yet.</p>';
+        } else {
+            html += '<table class="list-table"><thead><tr><th>Card ID</th><th>Name</th><th>Email</th><th>Phone</th></tr></thead><tbody>';
+            users.forEach(u => {
+                html += `<tr><td>${u.cardID}</td><td>${u.firstName} ${u.lastName}</td><td>${u.email}</td><td>${u.phoneNumber}</td></tr>`;
+            });
+            html += '</tbody></table>';
+        }
+        document.getElementById('adminList').innerHTML = html;
+    }
+    // --- List of Candidates ---
+    function showCandidates() {
+        document.getElementById('addElectionForm').style.display = 'none';
+        let candidates = [];
+        try {
+            candidates = JSON.parse(localStorage.getItem('dynamicCandidates')) || [];
+        } catch (e) { candidates = []; }
+        let html = '<h3>List of Candidates</h3>';
+        if (candidates.length === 0) {
+            html += '<p>No candidates available yet.</p>';
+        } else {
+            html += '<table class="list-table"><thead><tr><th>Card ID</th><th>Name</th><th>Party</th></tr></thead><tbody>';
+            candidates.forEach(c => {
+                html += `<tr><td>${c.cardID || ''}</td><td>${c.name}</td><td>${c.party}</td></tr>`;
+            });
+            html += '</tbody></table>';
+        }
+        document.getElementById('adminList').innerHTML = html;
+    }
+    // --- Add Election ---
+    function showAddElection() {
+        document.getElementById('adminList').innerHTML = '';
+        const formHtml = `
+            <h3>Add New Election</h3>
+            <form id="electionForm">
+                <input type="text" id="electionName" placeholder="Election Name" required style="margin-bottom:0.7rem;padding:0.5rem 1rem;width:80%;border-radius:6px;border:1px solid #ccc;" /><br>
+                <input type="date" id="electionDate" required style="margin-bottom:0.7rem;padding:0.5rem 1rem;width:80%;border-radius:6px;border:1px solid #ccc;" /><br>
+                <button type="submit">Add Election</button>
+            </form>
+            <div id="electionMsg" style="margin-top:0.7rem;"></div>
+        `;
+        const addElectionForm = document.getElementById('addElectionForm');
+        addElectionForm.innerHTML = formHtml;
+        addElectionForm.style.display = 'block';
+        document.getElementById('electionForm').onsubmit = function(e) {
+            e.preventDefault();
+            const name = document.getElementById('electionName').value.trim();
+            const date = document.getElementById('electionDate').value;
+            if (!name || !date) {
+                document.getElementById('electionMsg').innerText = 'Please fill all fields.';
+                return;
+            }
+            let elections = [];
+            try {
+                elections = JSON.parse(localStorage.getItem('elections')) || [];
+            } catch (e) { elections = []; }
+            elections.push({ name, date });
+            localStorage.setItem('elections', JSON.stringify(elections));
+            document.getElementById('electionMsg').innerText = 'Election added successfully!';
+            document.getElementById('electionForm').reset();
+        };
+    }
+    </script>
+     <footer>
+			<!-- header will contain foor logos and navigation bar; two asside in the left one in the right and one main in the middle -->
+			<div class="container">
+				<div class="logos">
+					<img src="Images/NigeriaFlag.jpg" alt="Logo 1" class="logo" />
+					<img src="Images/NPPLogo.jpg" alt="Logo 2" class="logo" />
+					<img src="Images/IPMC.jpg" alt="Logo 1" class="logo" />
+					<!-- <img src="Images/EClogo.png" alt="Logo 2" class="logo" /> -->
+				</div>
+			</div>
+		</footer>
+</body>
+</html>
